@@ -1,9 +1,17 @@
-import { Controller, HttpStatus, Response, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  HttpStatus,
+  Response,
+  Post,
+  Body,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
+import { LoginGuard } from './guards/login.guard';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -16,6 +24,7 @@ export class AuthController {
   }
 
   @Post('login')
+  @UseGuards(LoginGuard)
   public async login(@Response() res, @Body() model: LoginUserDto) {
     return await this.authService.login(model).then((result) => {
       return res.status(HttpStatus.OK).json(result);
