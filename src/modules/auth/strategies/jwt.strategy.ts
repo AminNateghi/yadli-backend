@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 
+import { envConfigService } from '../../../shared/services/config.service';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { envConfigService } from 'src/shared/env.config';
 import { AuthService } from '../auth.service';
 import { IJwtPayload } from '../interfaces/jwt-payload.interface';
 

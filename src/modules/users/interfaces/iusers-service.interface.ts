@@ -1,4 +1,4 @@
-import { ResponseBase, ResponseBaseWithData } from '@app/shared/interface/response-base';
+import { ResponseBase, ResponseBaseWithData } from '../../../shared/interface/response-base';
 import { IUser } from './user.interface';
 
 export interface IUsersService {

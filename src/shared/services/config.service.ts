@@ -3,7 +3,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 require('dotenv').config();
 
 export class EnvConfig {
-  constructor(private env: { [k: string]: string | undefined }) {}
+  constructor(private env: { [k: string]: string | undefined }) { }
 
   private getValue(key: string, throwOnMissing = true): string {
     const value = this.env[key];
@@ -61,10 +61,12 @@ export class EnvConfig {
   }
 }
 
-export const envConfigService = new EnvConfig(process.env).ensureValues([
+const envConfigService = new EnvConfig(process.env).ensureValues([
   'POSTGRES_HOST',
   'POSTGRES_PORT',
   'POSTGRES_USER',
   'POSTGRES_PASSWORD',
   'POSTGRES_DATABASE',
 ]);
+
+export { envConfigService }

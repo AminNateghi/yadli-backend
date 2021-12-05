@@ -7,7 +7,7 @@ import { AuthController } from './auth.controller';
 import { UsersModule } from '../users/users.module';
 // Strategies
 import { JwtStrategy } from './strategies/jwt.strategy';
-import { envConfigService } from '@app/shared/env.config';
+import { envConfigService } from '../../shared/services/config.service';
 
 @Module({
   controllers: [AuthController],
@@ -22,4 +22,4 @@ import { envConfigService } from '@app/shared/env.config';
   providers: [AuthService, JwtStrategy],
   exports: [PassportModule, AuthService, JwtModule],
 })
-export class AuthModule {}
+export class AuthModule { }

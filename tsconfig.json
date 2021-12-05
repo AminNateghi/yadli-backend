@@ -18,13 +18,13 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "resolveJsonModule": true,
-    "paths": {
-      "@app/modules/*": [
-        "src/modules/*"
-      ],
-      "@app/shared/*": [
-        "src/shared/*"
-      ]
-    }
+    // "paths": {
+    //   "@app/modules/*": [
+    //     "src/modules/*"
+    //   ],
+    //   "@app/shared/*": [
+    //     "src/shared/*"
+    //   ]
+    // }
   }
 }

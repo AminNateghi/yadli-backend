@@ -6,7 +6,7 @@ import * as bcrypt from 'bcrypt';
 import { IUsersService } from './interfaces/iusers-service.interface';
 import { IUser } from './interfaces/user.interface';
 import { UserEntity } from '../../shared/entity/user.entity';
-import { ResponseBase } from '@app/shared/interface/response-base';
+import { ResponseBase } from 'src/shared/interface/response-base';
 import { CreateUserDto } from '../auth/dto/create-user.dto';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class UsersService implements IUsersService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepo: Repository<IUser>,
-  ) {}
+  ) { }
 
   async findAll(): Promise<any[]> {
     return (await this.userRepo.find()).map(

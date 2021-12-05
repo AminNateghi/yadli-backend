@@ -8,15 +8,15 @@ import { CreateUserDto } from './dto/create-user.dto';
 import {
   ResponseBase,
   ResponseBaseWithData,
-} from '@app/shared/interface/response-base';
-import { envConfigService } from '@app/shared/env.config';
+} from 'src/shared/interface/response-base';
+import { envConfigService } from '../../shared/services/config.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
     private readonly usersService: UsersService,
-  ) {}
+  ) { }
 
   async register(user: CreateUserDto) {
     return await this.usersService.create(user);
