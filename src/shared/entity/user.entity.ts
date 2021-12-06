@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'user' })
 export class UserEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column()
@@ -11,12 +11,12 @@ export class UserEntity {
   @Column()
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   mobile: string;
 
   @Column()
   password: string;
 
-  @Column()
+  @Column({ default: true })
   enable: boolean;
 }
