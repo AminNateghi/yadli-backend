@@ -10,6 +10,7 @@ import {
   ResponseBaseWithData,
 } from 'src/shared/interface/response-base';
 import { envConfigService } from '../../shared/services/config.service';
+import { TokenVerifyDto } from './dto/token-verify.dto';
 
 @Injectable()
 export class AuthService {
@@ -47,6 +48,24 @@ export class AuthService {
     return await this.usersService.findOne({ email: payload.email });
   }
 
+  async verifyToken(model: TokenVerifyDto): Promise<ResponseBase> {
+    return await this.jwtService.verifyAsync(model.token).then(
+      (result) => {
+        const response: ResponseBase = {
+          success: true,
+          message: 'token valid.'
+        };
+        return response;
+      },
+      (error) => {
+        const response: ResponseBase = {
+          success: false,
+          message: 'token invalid!'
+        };
+        return response;
+      });
+  }
+
   private createToken(user: LoginUserDto) {
     const accessToken = this.jwtService.sign(
       {
@@ -62,4 +81,5 @@ export class AuthService {
       accessToken,
     };
   }
+
 }
