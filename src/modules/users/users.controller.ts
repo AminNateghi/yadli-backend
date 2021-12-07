@@ -1,7 +1,6 @@
-import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common';
-import { UsersService } from './users.service';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { RolesGuard } from '../auth/guards/roles.guard';
+import { UsersService } from './users.service';
 import { CreateUserDto } from '../auth/dto/create-user.dto';
 import { Roles } from '../auth/guards/roles.decorator';
 import { RolesEnum } from '../auth/guards/roles.enum';
@@ -12,15 +11,14 @@ export class UsersController {
   constructor(private readonly userService: UsersService) { }
 
   @Post('create')
-  @UseGuards(RolesGuard)
   @Roles(RolesEnum.Admin)
   create(@Body() user: CreateUserDto) {
-    // return this.userService.create(user);
+    return this.userService.create(user);
   }
 
   @Get('findAll')
-  @UseGuards(RolesGuard)
+  @Roles(RolesEnum.Admin)
   findAll() {
-    // return this.userService.findAll();
+    return this.userService.findAll();
   }
 }
