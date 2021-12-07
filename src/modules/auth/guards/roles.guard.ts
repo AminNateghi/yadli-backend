@@ -11,6 +11,7 @@ import { RolesEnum } from './roles.enum';
 
 @Injectable()
 export class RolesGuard extends AuthGuard('jwt') {
+
   constructor(private readonly reflector: Reflector) {
     super();
   }

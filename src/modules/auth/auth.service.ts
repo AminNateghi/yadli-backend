@@ -8,7 +8,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import {
   ResponseBase,
   ResponseBaseWithData,
-} from 'src/shared/interface/response-base';
+} from '../../shared/interface/response-base';
 import { envConfigService } from '../../shared/services/config.service';
 import { TokenVerifyDto } from './dto/token-verify.dto';
 

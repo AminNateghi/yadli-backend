@@ -6,7 +6,7 @@ import * as bcrypt from 'bcrypt';
 import { IUsersService } from './interfaces/iusers-service.interface';
 import { IUser } from './interfaces/user.interface';
 import { UserEntity } from '../../shared/entity/user.entity';
-import { ResponseBase } from 'src/shared/interface/response-base';
+import { ResponseBase } from '../../shared/interface/response-base';
 import { CreateUserDto } from '../auth/dto/create-user.dto';
 
 @Injectable()
