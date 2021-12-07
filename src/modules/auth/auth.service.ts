@@ -49,7 +49,10 @@ export class AuthService {
   }
 
   async verifyToken(model: TokenVerifyDto): Promise<ResponseBase> {
-    return await this.jwtService.verifyAsync(model.token).then(
+    return await this.jwtService.verifyAsync(
+      model.token,
+      { secret: envConfigService.getSecretsKey() }
+    ).then(
       (result) => {
         const response: ResponseBase = {
           success: true,
