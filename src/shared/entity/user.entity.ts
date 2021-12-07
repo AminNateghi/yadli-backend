@@ -1,3 +1,4 @@
+import { RolesEnum } from '../../modules/auth/guards/roles.enum';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'user' })
@@ -19,4 +20,12 @@ export class UserEntity {
 
   @Column({ default: true })
   enable: boolean;
+
+  @Column({
+    type: "enum",
+    enum: RolesEnum,
+    array: true,
+    default: [RolesEnum.User]
+  })
+  roles: RolesEnum[];
 }
