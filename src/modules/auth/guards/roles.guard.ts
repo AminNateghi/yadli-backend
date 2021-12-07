@@ -6,6 +6,8 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
+import { ROLES_KEY } from './roles.decorator';
+import { RolesEnum } from './roles.enum';
 
 @Injectable()
 export class RolesGuard extends AuthGuard('jwt') {
@@ -21,7 +23,7 @@ export class RolesGuard extends AuthGuard('jwt') {
     if (info) {
       console.log(info);
     }
-    const roles = this.reflector.get<string[]>('roles', context.getHandler());
+    const roles = this.reflector.get<RolesEnum[]>(ROLES_KEY, context.getHandler());
     console.log('roles');
     console.dir(roles);
     if (!roles) {
