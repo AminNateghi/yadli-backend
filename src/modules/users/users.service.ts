@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Request } from 'express';
 import * as bcrypt from 'bcrypt';
 
 import { IUsersService } from './interfaces/iusers-service.interface';
 import { IUser } from './interfaces/user.interface';
 import { UserEntity } from '../../shared/entity/user.entity';
-import { ResponseBase } from '../../shared/interface/response-base';
+import { ResponseBase, ResponseBaseWithData } from '../../shared/interface/response-base';
 import { CreateUserDto } from '../auth/dto/create-user.dto';
+import { UserInfoDto } from 'src/shared/dto/user-info.dto';
 
 @Injectable()
 export class UsersService implements IUsersService {
@@ -37,6 +39,19 @@ export class UsersService implements IUsersService {
       return false;
     }
     return await bcrypt.compare(password, user.password);
+  }
+
+  async userInfo(req: Request): Promise<ResponseBaseWithData<UserInfoDto>> {
+    const user: UserEntity = req.user as UserEntity;
+    const result: ResponseBaseWithData<UserInfoDto> = {
+      success: true,
+      data: {
+        name: user.name,
+        email: user.email,
+        mobile: user.mobile
+      }
+    }
+    return result;
   }
 
   async create(userDto: CreateUserDto): Promise<ResponseBase> {

@@ -33,12 +33,4 @@ export class AuthController {
   public async verify(@Body() model: TokenVerifyDto) {
     return await this.authService.verifyToken(model);
   }
-
-  // @Get('whoami')
-  // @UseGuards(JwtAuthGuard)
-  // public async testAuth(@Response() res): Promise<any> {
-  //   return await this.authService.howami().then(result => {
-  //     return res.status(HttpStatus.OK).json(result);
-  //   });
-  // }
 }

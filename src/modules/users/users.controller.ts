@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { Request } from 'express';
 import { UsersService } from './users.service';
 import { CreateUserDto } from '../auth/dto/create-user.dto';
 import { Roles } from '../auth/guards/roles.decorator';
@@ -20,5 +21,11 @@ export class UsersController {
   @Roles(RolesEnum.Admin)
   findAll() {
     return this.userService.findAll();
+  }
+
+  @Get('info')
+  @Roles(RolesEnum.User)
+  info(@Req() request: Request) {
+    return this.userService.userInfo(request);
   }
 }
