@@ -28,7 +28,7 @@ export class UsersService implements IUsersService {
     return await this.userRepo.findOne(options);
   }
 
-  async findById(id: number): Promise<IUser> {
+  async findById(id: string): Promise<IUser> {
     return await this.userRepo.findOne(id);
   }
 
@@ -77,18 +77,21 @@ export class UsersService implements IUsersService {
     return response;
   }
 
-  async update(id: number, newValue: IUser): Promise<IUser> {
-    const user = await this.userRepo.findOne(id);
+  async update(req: Request, newValue: IUser): Promise<ResponseBase> {
+    const user: UserEntity = req.user as UserEntity;
     if (!user.email) {
       console.debug('user not found');
       return;
     }
 
-    await this.userRepo.update(id, newValue);
-    return await this.userRepo.findOne(id);
+    // This item is not editable
+    newValue.email = user.email;
+    await this.userRepo.update(user.id, newValue);
+    const response: ResponseBase = { success: true };
+    return response;
   }
 
-  async delete(id: number): Promise<string> {
+  async delete(id: string): Promise<string> {
     return '👍';
   }
 }
