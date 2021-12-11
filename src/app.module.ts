@@ -12,7 +12,7 @@ import { envConfigService } from './shared/services/config.service';
   imports: [
     TypeOrmModule.forRoot(envConfigService.getDatabaseConnectionConfig()),
     TypeOrmModule.forFeature([UserEntity]),
-    // StatusModule,
+    StatusModule,
     UsersModule,
     AuthModule,
   ],
