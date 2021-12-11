@@ -12,13 +12,13 @@ import { UpdateUserDto } from '../auth/dto/update-user.dto';
 export class UsersController {
   constructor(private readonly userService: UsersService) { }
 
-  @Post('create')
+  @Post()
   @Roles(RolesEnum.Admin)
   create(@Body() user: CreateUserDto) {
     return this.userService.create(user);
   }
 
-  @Get('findAll')
+  @Get()
   @Roles(RolesEnum.Admin)
   findAll() {
     return this.userService.findAll();
