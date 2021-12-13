@@ -1,5 +1,6 @@
 import { RolesEnum } from '../../modules/auth/guards/roles.enum';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { VehicleEntity } from './vehicle.entity';
 
 @Entity({ name: 'user' })
 export class UserEntity {
@@ -28,4 +29,7 @@ export class UserEntity {
     default: [RolesEnum.User]
   })
   roles: RolesEnum[];
+
+  @OneToMany(() => VehicleEntity, vehicle => vehicle.user)
+  vehicles: VehicleEntity[];
 }
