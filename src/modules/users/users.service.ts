@@ -9,7 +9,7 @@ import { IUser } from './interfaces/user.interface';
 import { UserEntity } from '../../shared/entity/user.entity';
 import { ResponseBase, ResponseBaseWithData } from '../../shared/interface/response-base';
 import { CreateUserDto } from '../auth/dto/create-user.dto';
-import { UserInfoDto } from 'src/shared/dto/user-info.dto';
+import { UserInfoDto } from '../../shared/dto/user-info.dto';
 
 @Injectable()
 export class UsersService implements IUsersService {
