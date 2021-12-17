@@ -14,8 +14,7 @@ import { UserInfoDto } from '../../shared/dto/user-info.dto';
 @Injectable()
 export class UsersService implements IUsersService {
   constructor(
-    @InjectRepository(UserEntity)
-    private readonly userRepo: Repository<IUser>,
+    @InjectRepository(UserEntity) private readonly userRepo: Repository<IUser>,
   ) { }
 
   async findAll(): Promise<any[]> {
