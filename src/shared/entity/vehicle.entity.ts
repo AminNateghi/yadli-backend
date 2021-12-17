@@ -1,12 +1,11 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { FuelTypeEnum } from '../enum/fuel-type.enum';
+import { IVehicle } from '../interface/vehicle.interface';
 import { UserEntity } from './user.entity';
+import { EntityBase } from './_entity-base';
 
 @Entity({ name: 'vehicle' })
-export class VehicleEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class VehicleEntity extends EntityBase implements IVehicle {
   @Column()
   name: string;
 
@@ -25,13 +24,8 @@ export class VehicleEntity {
   @Column()
   vin: string;
 
-  @Column({
-    type: "enum",
-    enum: FuelTypeEnum,
-    array: true,
-    default: [FuelTypeEnum.Other]
-  })
-  fuelType: FuelTypeEnum[];
+  @Column({ type: 'int', default: 0 })
+  fuelType: FuelTypeEnum;
 
   @Column()
   description: string;

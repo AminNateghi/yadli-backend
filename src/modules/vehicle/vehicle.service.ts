@@ -1,17 +1,22 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { Inject, Injectable, Scope } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { REQUEST } from '@nestjs/core';
+import { Request } from 'express';
 import { Repository } from 'typeorm';
 
-import { VehicleEntity } from '../../shared/entity/vehicle.entity';
 import { ResponseBase, ResponseBaseWithData } from '../../shared/interface/response-base';
 import { IVehicleService } from '../../shared/interface/vehicle-service.interface';
 import { IVehicle } from '../../shared/interface/vehicle.interface';
+import { VehicleEntity } from '../../shared/entity/vehicle.entity';
+import { VehicleMapper } from '../../shared/mapper/vehicle.mapper';
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class VehicleService implements IVehicleService {
 
   constructor(
+    @Inject(REQUEST) private request: Request,
     @InjectRepository(VehicleEntity) private readonly vehicleRepo: Repository<IVehicle>,
+    private mapper: VehicleMapper
   ) { }
 
   async findAll(): Promise<ResponseBaseWithData<IVehicle[]>> {
@@ -24,19 +29,33 @@ export class VehicleService implements IVehicleService {
   }
 
 
-
   findById(id: string): Promise<IVehicle> {
     throw new Error('Method not implemented.');
   }
+
   findOne(options: object): Promise<IVehicle> {
     throw new Error('Method not implemented.');
   }
-  create(user: IVehicle): Promise<ResponseBase> {
+
+  async create(model: IVehicle): Promise<ResponseBase> {
+    const mappedModel = this.mapper.mapToCreateEntity(model);
+    try {
+      console.log('---');
+      console.log(mappedModel);
+      console.log('---');
+
+      await this.vehicleRepo.save(mappedModel);
+      const response: ResponseBase = { success: true };
+      return response;
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
+  update(newValue: IVehicle): Promise<ResponseBase> {
     throw new Error('Method not implemented.');
   }
-  update(req: Request, newValue: IVehicle): Promise<ResponseBase> {
-    throw new Error('Method not implemented.');
-  }
+
   delete(id: string): Promise<ResponseBase> {
     throw new Error('Method not implemented.');
   }
