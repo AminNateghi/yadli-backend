@@ -40,10 +40,6 @@ export class VehicleService implements IVehicleService {
   async create(model: IVehicle): Promise<ResponseBase> {
     const mappedModel = this.mapper.mapToCreateEntity(model);
     try {
-      console.log('---');
-      console.log(mappedModel);
-      console.log('---');
-
       await this.vehicleRepo.save(mappedModel);
       const response: ResponseBase = { success: true };
       return response;
