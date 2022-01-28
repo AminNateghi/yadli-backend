@@ -25,10 +25,9 @@ export class UserEntity {
   @Column({
     type: "enum",
     enum: RolesEnum,
-    array: true,
-    default: [RolesEnum.User]
+    default: RolesEnum.User
   })
-  roles: RolesEnum[];
+  role: RolesEnum;
 
   @OneToMany(() => VehicleEntity, vehicle => vehicle.user)
   vehicles: VehicleEntity[];
