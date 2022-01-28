@@ -9,6 +9,7 @@ import { IVehicleService } from '../../shared/interface/vehicle-service.interfac
 import { IVehicle } from '../../shared/interface/vehicle.interface';
 import { VehicleEntity } from '../../shared/entity/vehicle.entity';
 import { VehicleMapper } from '../../shared/mapper/vehicle.mapper';
+import { UserEntity } from 'src/shared/entity/user.entity';
 
 @Injectable()
 export class VehicleService implements IVehicleService {
@@ -20,7 +21,8 @@ export class VehicleService implements IVehicleService {
   ) { }
 
   async findAll(): Promise<ResponseBaseWithData<IVehicle[]>> {
-    const data = await this.vehicleRepo.find({ relations: ["user"] });
+    const user = this.request.user as UserEntity;
+    const data = await this.vehicleRepo.createQueryBuilder("user").where("user.id = :id", { id: user.id }).getMany();
     const result: ResponseBaseWithData<IVehicle[]> = {
       success: true,
       data: data
