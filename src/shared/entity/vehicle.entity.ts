@@ -9,25 +9,25 @@ export class VehicleEntity extends EntityBase implements IVehicle {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   brandName: string;
 
-  @Column()
+  @Column({ nullable: true })
   modelName: string;
 
-  @Column()
+  @Column({ nullable: true })
   year: number;
 
-  @Column()
+  @Column({ nullable: true })
   licenseNo: string;
 
-  @Column()
+  @Column({ nullable: true })
   vin: string;
 
-  @Column({ type: 'int', default: 0 })
+  @Column({ type: 'int', default: 0, nullable: true })
   fuelType: FuelTypeEnum;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
   @ManyToOne(() => UserEntity, user => user.vehicles)
