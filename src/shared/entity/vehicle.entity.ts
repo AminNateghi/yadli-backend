@@ -30,6 +30,7 @@ export class VehicleEntity extends EntityBase implements IVehicle {
   @Column({ nullable: true })
   description: string;
 
+
   @ManyToOne(() => UserEntity, user => user.vehicles)
   user: UserEntity;
 }

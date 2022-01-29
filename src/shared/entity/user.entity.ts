@@ -25,10 +25,13 @@ export class UserEntity {
   @Column({
     type: "enum",
     enum: RolesEnum,
-    default: RolesEnum.User
+    default: [RolesEnum.User]
   })
-  role: RolesEnum;
+  roles: RolesEnum[];
 
-  @OneToMany(() => VehicleEntity, vehicle => vehicle.user)
+
+  @OneToMany(() => VehicleEntity, vehicle => vehicle.user, {
+    onDelete: 'CASCADE'
+  })
   vehicles: VehicleEntity[];
 }
