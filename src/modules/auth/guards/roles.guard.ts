@@ -17,28 +17,26 @@ export class RolesGuard extends AuthGuard('jwt') {
   }
 
   handleRequest(err, user, info: Error, context: ExecutionContext) {
-    console.log('RolesGuard::handleRequest::CP1::user:', user);
     if (err) {
       throw err;
     }
     if (info) {
       console.log(info);
     }
+
     const roles = this.reflector.get<RolesEnum[]>(ROLES_KEY, context.getHandler());
-    console.log('roles');
-    console.dir(roles);
     if (!roles) {
-      return true;
+      return false;
     }
-    const hasRole = () => user.roles.some((role) => roles.includes(role));
+    const hasRole = roles.some(e => e === user.roles);
     if (!user) {
       throw new UnauthorizedException();
     }
-    if (!(user.roles && hasRole())) {
+    if (!(user.roles && hasRole)) {
       throw new ForbiddenException('Forbidden');
     }
 
-    if (user && user.roles && hasRole()) {
+    if (user && user.roles && hasRole) {
       return user;
     }
 
