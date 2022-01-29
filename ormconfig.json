@@ -4,7 +4,7 @@
   "port": 5432,
   "username": "postgres",
   "password": "123",
-  "database": "yadli_GH_DB",
+  "database": "yadli_db",
   "entities": [
     "**/*.entity.ts"
   ],
