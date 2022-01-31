@@ -35,5 +35,5 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 # risk
-*ormconfig.json
-*.env
+/*ormconfig.json
+/*.env
