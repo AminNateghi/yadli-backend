@@ -37,40 +37,30 @@ export class EnvConfig {
   }
 
   public getDatabaseConnectionConfig(): TypeOrmModuleOptions {
-    const isProd = this.isProduction();
-    if (isProd) {
-      console.log('= PRODUCTION =');
-      return {
-        url: process.env.DATABASE_URL,
-        ssl: { rejectUnauthorized: false }
-      }
-    }
-    else {
-      console.log('= STAGE =');
-      return {
-        type: 'postgres',
+    return {
+      type: 'postgres',
 
-        host: this.getValue('POSTGRES_HOST'),
-        port: parseInt(this.getValue('POSTGRES_PORT')),
-        username: this.getValue('POSTGRES_USER'),
-        password: this.getValue('POSTGRES_PASSWORD'),
-        database: this.getValue('POSTGRES_DATABASE'),
+      host: this.getValue('POSTGRES_HOST'),
+      port: parseInt(this.getValue('POSTGRES_PORT')),
+      username: this.getValue('POSTGRES_USER'),
+      password: this.getValue('POSTGRES_PASSWORD'),
+      database: this.getValue('POSTGRES_DATABASE'),
 
-        entities: ['**/*.entity.ts'],
+      entities: ['**/*.entity.ts'],
 
-        migrationsTableName: 'migration',
+      migrationsTableName: 'migration',
 
-        migrations: ['src/migration/*.ts'],
+      migrations: ['src/migration/*.ts'],
 
-        cli: {
-          migrationsDir: 'src/migration',
-        },
+      cli: {
+        migrationsDir: 'src/migration',
+      },
 
-        ssl: this.isProduction(),
-      };
-    }
+      ssl: { rejectUnauthorized: false }
+    };
   }
 }
+
 
 const envConfigService = new EnvConfig(process.env).ensureValues([
   'POSTGRES_HOST',
