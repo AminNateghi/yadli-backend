@@ -38,12 +38,15 @@ export class EnvConfig {
 
   public getDatabaseConnectionConfig(): TypeOrmModuleOptions {
     const isProd = this.isProduction();
-    if (isProd)
+    if (isProd) {
+      console.log('= PRODUCTION =');
       return {
         url: process.env.DATABASE_URL,
         ssl: { rejectUnauthorized: false }
       }
-    else
+    }
+    else {
+      console.log('= STAGE =');
       return {
         type: 'postgres',
 
@@ -65,6 +68,7 @@ export class EnvConfig {
 
         ssl: this.isProduction(),
       };
+    }
   }
 }
 
