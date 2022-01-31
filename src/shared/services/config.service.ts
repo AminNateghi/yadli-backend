@@ -56,7 +56,7 @@ export class EnvConfig {
         migrationsDir: 'src/migration',
       },
 
-      ssl: false
+      ssl: { rejectUnauthorized: false }
     };
   }
 }
