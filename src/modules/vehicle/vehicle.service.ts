@@ -9,8 +9,7 @@ import { IVehicleService } from '../../shared/interface/vehicle-service.interfac
 import { IVehicle } from '../../shared/interface/vehicle.interface';
 import { VehicleEntity } from '../../shared/entity/vehicle.entity';
 import { VehicleMapper } from '../../shared/mapper/vehicle.mapper';
-import { UserEntity } from 'src/shared/entity/user.entity';
-import { IUser } from '../users/interfaces/user.interface';
+import { UserEntity } from '../../shared/entity/user.entity';
 
 @Injectable()
 export class VehicleService implements IVehicleService {
